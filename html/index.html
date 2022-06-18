@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.umd.prod.js" defer></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>-->
+    <title>Report System</title>
+</head>
+<body>
+    <div id="app"> 
+        <div v-if="show" class="main-container">
+            <div v-if="showreports" class = "reports" v-for="item in reports"  :key="item.id" >
+                    <div class="report" v-if="item.active">
+                        <div class = "text">
+                            <div>{{item.info}}</div>
+                            
+                            <span v-if="isAttack(item)" class="caller"> id: {{item.callerid}} | Имя: {{item.caller}} | citizenid: {{item.citizenid}} | Принял: <span class="admin" style ="color: rgb(30, 255, 0);">{{item.admin}}</span></span>
+                            <span v-else class="caller"> id: {{item.callerid}} | Имя: {{item.caller}} | citizenid: {{item.citizenid}} | Принял: <span class="admin" style ="color: red;" >{{item.admin}}</span></span>
+                            <!--<div class="caller">id: {{item.callerid}} |   Имя: {{item.caller}} | citizenid: {{item.citizenid}} | </div>
+                            <div v-if="isAttack(item)" class="caller"> | Принял: <span class="admin" style ="color: Blue;">{{item.admin}}</span></div>
+                            <div v-else class="caller"> | Принял: <span class="admin" style ="color: red;" >{{item.admin}}</span></div> -->
+                        </div>
+                        
+                        <div class = "action">
+                           <button style="background-color: green;" @click="attach(item)">Принять</button>
+                           <button style="background-color: rgb(241, 187, 9);" @click="spec(item)">Наблюдать</button>
+                           <button style="background-color: rgb(241, 187, 9);" @click="reply(item)" >Ответить</button>
+                           <button style="background-color: rgba(247, 8, 8, 0.747);"@click="dettach(item)">Открепиться</button>
+                           <button style="background-color: rgb(29, 116, 216);" @click="closeT(item)">Закрыть</button>
+                        </div>
+                    </div>
+            </div>
+            <div v-show="modalWindowShoing">
+                <div class="dialog">
+                    <div class="dialog__content">
+                        <p class="dialog_title">{{dialog_title}}</p>
+                            <textarea v-model="inputcontent" class="dialog_text" name="comment" cols="40" rows="6"></textarea></p>
+                            <div style="display: flex; margin-bottom: 5px;">
+                                <button class="btn ok" @click="btnOk">Отправить</button>
+                                <button class="btn cancel" @click="btnCancel" style="flex-direction: space-between;">Отмена</button>
+                            </div>
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--<div v-show="modalInputShoing">
+                <div class="dialog">
+                    <div >
+                        <p style="margin:5px; justify-content: center;
+                            align-items: center;text-align: center; color: white; ">Опишите вашу проблему</p>
+                            <textarea v-model="ticketcontext" style=" background-color: rgba(7, 6, 6, 0.205); margin:5px; width:100%; align-items: center; color: white;" name="comment" cols="40" rows="3"></textarea></p>
+                            <div style="display: flex;">
+                                <button class="btn ok" @click="submit">Отправить</button>
+                                <button class="btn cancel" @click="cancel" style="flex-direction: space-between;">Отмена</button>
+                            </div>
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>  -->
+           
+        </div>
+    </div>
+    
+</body>
+<script src="./js/app.js"></script>  
+
+</html>
+
+<!--
+
+
+
+
+-->
